@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import threading, time
 
-from kafka import KafkaAdminClient, KafkaConsumer, KafkaProducer
+from kafka import KafkaAdminClient, KafkaProducer
 from kafka.admin import NewTopic
 
 
@@ -40,7 +40,6 @@ def main():
 
     tasks = [
         Producer(),
-        Consumer()
     ]
 
     # Start threads of a publisher/producer and a subscriber/consumer to 'input' Kafka topic

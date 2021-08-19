@@ -22,7 +22,7 @@ class Producer(threading.Thread):
             #producer.send('input', b"test")
             #producer.send('input', b"\xc2Hola, mundo!")
             t = time.time()
-            date = b'(int(t))'
+            date = b(int(t))
             producer.send('input', date)
             time.sleep(1)
 

@@ -1,7 +1,12 @@
 #!/usr/bin/env python
 import threading, time
 
-#print(int(t))
+from datetime import datetime
+from tzlocal import get_localzone # $ pip install tzlocal
+
+now = datetime.now(get_localzone())
+print(now.isoformat('T'))
+
 
 from kafka import KafkaAdminClient, KafkaProducer
 from kafka.admin import NewTopic
@@ -21,9 +26,7 @@ class Producer(threading.Thread):
         while not self.stop_event.is_set():
             #producer.send('input', b"test")
             #producer.send('input', b"\xc2Hola, mundo!")
-            t = time.time()
-            date = b(int(t))
-            producer.send('input', date)
+            producer.send('input', now.isoformat('T'))
             time.sleep(1)
 
         producer.close()

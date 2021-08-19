@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 import threading, time
+t = time.time()
+
+#print(int(t))
 
 from kafka import KafkaAdminClient, KafkaProducer
 from kafka.admin import NewTopic
@@ -17,8 +20,9 @@ class Producer(threading.Thread):
         producer = KafkaProducer(bootstrap_servers='lab-python-kafka-brokers.kafka.svc.cluster.local:9092')
 
         while not self.stop_event.is_set():
-            producer.send('input', b"test")
-            producer.send('input', b"\xc2Hola, mundo!")
+            #producer.send('input', b"test")
+            #producer.send('input', b"\xc2Hola, mundo!")
+            producer.send('input', b(int(t)))
             time.sleep(1)
 
         producer.close()

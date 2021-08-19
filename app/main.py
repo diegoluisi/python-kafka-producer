@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import threading, time
-t = time.time()
 
 #print(int(t))
 
@@ -22,7 +21,9 @@ class Producer(threading.Thread):
         while not self.stop_event.is_set():
             #producer.send('input', b"test")
             #producer.send('input', b"\xc2Hola, mundo!")
-            producer.send('input', b'(int(t))')
+            t = time.time()
+            date = b'(int(t))'
+            producer.send('input', date)
             time.sleep(1)
 
         producer.close()

@@ -24,9 +24,9 @@ class Producer(threading.Thread):
         producer = KafkaProducer(bootstrap_servers='lab-python-kafka-brokers.kafka.svc.cluster.local:9092')
 
         while not self.stop_event.is_set():
-            #producer.send('input', b"test")
+            producer.send('input', b"test")
             #producer.send('input', b"\xc2Hola, mundo!")
-            producer.send('input', now.isoformat('T'))
+            #producer.send('input', now.isoformat('T'))
             time.sleep(1)
 
         producer.close()

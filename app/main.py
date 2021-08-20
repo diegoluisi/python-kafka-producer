@@ -4,8 +4,6 @@ import threading, time
 from datetime import datetime
 from tzlocal import get_localzone # $ pip install tzlocal
 
-now = datetime.now(get_localzone())
-print(now.isoformat('T'))
 
 
 from kafka import KafkaAdminClient, KafkaProducer
@@ -24,7 +22,9 @@ class Producer(threading.Thread):
         producer = KafkaProducer(bootstrap_servers='lab-python-kafka-brokers.kafka.svc.cluster.local:9092')
 
         while not self.stop_event.is_set():
-            producer.send('input', b"test")
+            now = datetime.now(get_localzone())
+            now_str = str.encode(now.isoformat('T'))
+            producer.send('input', now_str)
             #producer.send('input', b"\xc2Hola, mundo!")
             #producer.send('input', now.isoformat('T'))
             time.sleep(1)
